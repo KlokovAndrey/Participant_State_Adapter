@@ -2,7 +2,7 @@ package com.avaya.ccaas.participant_state_adapter.controller;
 
 import com.avaya.ccaas.participant_state_adapter.api.V1Api;
 import com.avaya.ccaas.participant_state_adapter.model.Participant;
-import com.avaya.ccaas.participant_state_adapter.service.ParticipantStateService;
+import com.avaya.ccaas.participant_state_adapter.service.impl.ParticipantStateServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 public class ParticipantStateController implements V1Api {
 
-    private final ParticipantStateService service;
+    private final ParticipantStateServiceImpl service;
 
     @Override
     public Optional<NativeWebRequest> getRequest() {
