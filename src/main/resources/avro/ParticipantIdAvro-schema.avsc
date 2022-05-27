@@ -1,7 +1,7 @@
 {
     "type": "record",
     "namespace": "com.avaya.ccaas.participant_state_adapter.avro",
-    "name": "ParticipantStateAvro",
+    "name": "ParticipantIdAvro",
     "fields":[
         {
             "name": "id",
@@ -9,10 +9,6 @@
         },
         {
             "name": "callId",
-            "type": "string"
-        },
-        {
-            "name": "name",
             "type": "string"
         }
     ]

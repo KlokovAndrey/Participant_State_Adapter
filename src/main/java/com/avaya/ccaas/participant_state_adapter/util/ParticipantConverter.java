@@ -16,12 +16,29 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 @Component
-public class ParticipantConverter implements AvroConverter<Participant>{
+public class ParticipantConverter implements AvroConverter<Participant, ParticipantStateAvro>{
 
     @Override
-    public byte[] pojoToAvro(final Participant pojo) {
+    public ParticipantStateAvro pojoToAvro(final Participant pojo) {
+        ParticipantStateAvro avro = new ParticipantStateAvro();
+        avro.setId(pojo.getId());
+        avro.setCallId(pojo.getCallId());
+        avro.setName(pojo.getName());
+        return avro;
+    }
+
+    @Override
+    public Participant avroToPojo(final ParticipantStateAvro avro) {
+        Participant participant = new Participant();
+        participant.setId(avro.getId().toString());
+        participant.setCallId(avro.getCallId().toString());
+        participant.setName(avro.getName().toString());
+        return participant;
+    }
+
+    public byte[] serialize(final Participant pojo) {
         byte[] data = new byte[0];
-        ParticipantStateAvro avro = new ParticipantStateAvro(pojo.getId(), pojo.getName());
+        ParticipantStateAvro avro = new ParticipantStateAvro(pojo.getId(), pojo.getCallId(), pojo.getName());
         DatumWriter<ParticipantStateAvro> writer = new SpecificDatumWriter<>(
             ParticipantStateAvro.class);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -38,8 +55,7 @@ public class ParticipantConverter implements AvroConverter<Participant>{
         return data;
     }
 
-    @Override
-    public Participant avroToPojo(final byte[] data) {
+    public Participant deserialize(final byte[] data) {
         Participant participant = null;
         DatumReader<ParticipantStateAvro> reader
             = new SpecificDatumReader<>(ParticipantStateAvro.class);
@@ -50,6 +66,7 @@ public class ParticipantConverter implements AvroConverter<Participant>{
             ParticipantStateAvro avro = reader.read(null, decoder);
             participant = new Participant();
             participant.setId(avro.getId().toString());
+            participant.setCallId(avro.getCallId().toString());
             participant.setName(avro.getName().toString());
         } catch (Exception e) {
             e.printStackTrace();

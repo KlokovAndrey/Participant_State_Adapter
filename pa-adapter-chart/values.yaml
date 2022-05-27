@@ -1,0 +1,4 @@
+container:
+  image: metam-docker-hosted.forge.avaya.com/ps_adapter:0.0.1-SNAPSHOT
+
+replicaCount: 2

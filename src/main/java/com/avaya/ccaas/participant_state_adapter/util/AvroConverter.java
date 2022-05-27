@@ -1,10 +1,8 @@
 package com.avaya.ccaas.participant_state_adapter.util;
 
-import com.avaya.ccaas.participant_state_adapter.model.Participant;
+public interface AvroConverter<T, D> {
 
-public interface AvroConverter<T> {
+    D pojoToAvro(T pojo);
 
-    byte[] pojoToAvro(T pojo);
-
-    T avroToPojo(byte[] data);
+    T avroToPojo(D avro);
 }

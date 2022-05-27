@@ -1,9 +1,10 @@
 package com.avaya.ccaas.participant_state_adapter.service;
 
 import com.avaya.ccaas.participant_state_adapter.model.Participant;
+import com.avaya.ccaas.participant_state_adapter.model.ParticipantToCall;
 
 public interface ParticipantHandlerService {
 
-    void save(Participant participant);
-    void delete(String participantId);
+    void add(Participant participant);
+    void remove(ParticipantToCall participantToCall);
 }
