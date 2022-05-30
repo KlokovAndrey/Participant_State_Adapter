@@ -23,11 +23,11 @@ public class Receiver {
             ParticipantStateAvro avro = new ParticipantStateAvro();
             avro.setId(message.get("id").toString());
             avro.setName(message.get("name").toString());
-            log.info("Kafka message receiving success { " + avro.getId() + avro.getName() + " }");
+            log.info("Kafka message has been received successfully {}, {}", avro.getId(), avro.getName());
         }else if (message.hasField("id")){
             ParticipantIdAvro avro = new ParticipantIdAvro();
             avro.setId(message.get("id").toString());
-            log.info("Kafka message receiving success { " + avro.getId() + " }");
+            log.info("Kafka message has been received successfully {}", avro.getId());
         } else {
             log.error("Receiving kafka message was failed");
         }

@@ -15,23 +15,24 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 public class Sender {
 
     private final KafkaTemplate<String, GenericRecord> kafkaTemplate;
+    private ListenableFutureCallback<SendResult<String, GenericRecord>> callback =
+        new ListenableFutureCallback<SendResult<String, GenericRecord>>() {
+        @Override
+        public void onSuccess(SendResult<String, GenericRecord> result) {
+            log.info("Message has been sent successfully");
+        }
+
+        @Override
+        public void onFailure(Throwable ex) {
+            log.error("unable to send message");
+        }
+    };
 
     public void send(String topic, String messageId, GenericRecord message) {
-        log.info("Sending message to the Kafka");
+        log.info("Sending message {} to the Kafka", message);
         try {
             ListenableFuture<SendResult<String, GenericRecord>> future = kafkaTemplate.send(topic, messageId, message);
-            future.addCallback(new ListenableFutureCallback<SendResult<String, GenericRecord>>() {
-
-                @Override
-                public void onSuccess(SendResult<String, GenericRecord> result) {
-                    log.info("sent message='{" + message + "}' with offset={" + result.getRecordMetadata().offset() + "}");
-                }
-
-                @Override
-                public void onFailure(Throwable ex) {
-                    log.error("unable to send message='{" + message + "}");
-                }
-            });
+            future.addCallback(callback);
         } catch (Exception exception){
             log.error(exception.getMessage());
         }
