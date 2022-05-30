@@ -36,7 +36,7 @@ public class ParticipantStateController implements V1Api {
     }
 
     @Override
-    public ResponseEntity<String> removeParticipant(@Valid String participantId, @Valid String callId) {
+    public ResponseEntity<String> removeParticipant(@Valid String callId, @Valid String participantId) {
         log.info("Request to remove participant received {" + participantId + "}");
         runAsyncService.run(() -> service.remove(new ParticipantToCall(participantId, callId)));
         return ResponseEntity.ok("");

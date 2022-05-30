@@ -11,5 +11,5 @@ spec:
     - port: 8087
       targetPort: 8095
       protocol: TCP
-      nodePort: 30000
+      nodePort: 32000
   type: NodePort
