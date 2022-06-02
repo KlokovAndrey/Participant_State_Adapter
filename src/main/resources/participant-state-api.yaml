@@ -55,8 +55,8 @@ paths:
       description: remove participant from the call
 
       parameters:
-        - $ref: '#/components/parameters/participantId'
         - $ref: '#/components/parameters/callId'
+        - $ref: '#/components/parameters/participantId'
 
       responses:
         "202":

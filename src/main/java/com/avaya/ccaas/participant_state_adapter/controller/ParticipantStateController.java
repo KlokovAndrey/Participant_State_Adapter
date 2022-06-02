@@ -5,8 +5,6 @@ import com.avaya.ccaas.participant_state_adapter.handler.AddParticipantCommandHa
 import com.avaya.ccaas.participant_state_adapter.handler.RemoveParticipantCommandHandler;
 import com.avaya.ccaas.participant_state_adapter.model.Participant;
 import com.avaya.ccaas.participant_state_adapter.model.ParticipantToCall;
-import com.avaya.ccaas.participant_state_adapter.service.ParticipantHandlerService;
-import com.avaya.ccaas.participant_state_adapter.service.RunAsyncService;
 import com.avaya.ccaas.participant_state_adapter.validator.ParticipantValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
